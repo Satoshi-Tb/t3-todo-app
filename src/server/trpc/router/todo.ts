@@ -61,4 +61,15 @@ export const todoRouter = router({
       });
       return task;
     }),
+
+  deteteTask: protectedProcedure
+    .input(deleteTaskSchema)
+    .mutation(async ({ ctx, input }) => {
+      const task = await ctx.prisma.task.delete({
+        where: {
+          id: input.taskId,
+        },
+      });
+      return task;
+    }),
 });
